@@ -145,6 +145,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\GameOverviewsController.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,8 +156,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CPP_DB.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameOverview.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerDetail.cs" />
+    <Compile Include="Models\PlayerToGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

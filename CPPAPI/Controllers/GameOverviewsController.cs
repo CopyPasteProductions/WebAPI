@@ -13,109 +13,140 @@ using CPPAPI.Models;
 
 namespace CPPAPI.Controllers
 {
-    public class GameOverviewsController : ApiController
-    {
-        private CPP_DB db = new CPP_DB();
+    //public class GameOverviewsController : ApiController
+    //{
+    //    private CPP_DB db = new CPP_DB();
 
-        // GET: api/GameOverviews
-        public IQueryable<GameOverview> GetGameOverviews()
-        {
-            return db.GameOverviews.Include(x=>x.Players);
-        }
+    //    // GET: api/GameOverviews
+    //    public IQueryable<GameOverview> GetGameOverviews()
+    //    {
+    //         return db.GameOverviews.Include(x=>x.Players);
+    //        //return db.GameOverviews;
+    //    }
 
 
 
-        // GET: api/GameOverviews/5
-        [ResponseType(typeof(GameOverview))]
-        public async Task<IHttpActionResult> GetGameOverview(int id)
-        {
-            GameOverview gameOverview = await db.GameOverviews.FindAsync(id);
-            if (gameOverview == null)
-            {
-                return NotFound();
-            }
+    //    // GET: api/GameOverviews/5
+    //    [ResponseType(typeof(GameOverview))]
+    //    public async Task<IHttpActionResult> GetGameOverview(int id)
+    //    {
+    //        GameOverview gameOverview = await db.GameOverviews.FindAsync(id);
+    //        db.Entry(gameOverview).Collection(x => x.Players).Load();
 
-            return Ok(gameOverview);
-        }
+    //        if (gameOverview == null)
+    //        {
+    //            return NotFound();
+    //        }
+ 
+    //        return Ok(gameOverview);
+    //    }
 
-        // PUT: api/GameOverviews/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutGameOverview(int id, GameOverview gameOverview)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+    //    // PUT: api/GameOverviews/5
+    //    [ResponseType(typeof(void))]
+    //    public async Task<IHttpActionResult> PutGameOverview(int id, GameOverview gameOverview)
+    //    {
+    //        if (!ModelState.IsValid)
+    //        {
+    //            return BadRequest(ModelState);
+    //        }
 
-            if (id != gameOverview.Id)
-            {
-                return BadRequest();
-            }
+    //        if (id != gameOverview.Id)
+    //        {
+    //            return BadRequest();
+    //        }
 
-            db.Entry(gameOverview).State = EntityState.Modified;
+    //        db.Entry(gameOverview).State = EntityState.Modified;
 
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GameOverviewExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+    //        try
+    //        {
+    //            await db.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateConcurrencyException)
+    //        {
+    //            if (!GameOverviewExists(id))
+    //            {
+    //                return NotFound();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+    //        return StatusCode(HttpStatusCode.NoContent);
+    //    }
 
-        // POST: api/GameOverviews
-        [ResponseType(typeof(GameOverview))]
-        public async Task<IHttpActionResult> PostGameOverview(GameOverview gameOverview)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+    //    // POST: api/GameOverviews
+    //    [ResponseType(typeof(GameOverview))]
+    //    public async Task<IHttpActionResult> PostGameOverview(GameOverview gameOverview)
+    //    {
+    //        if (!ModelState.IsValid)
+    //        {
+    //            return BadRequest(ModelState);
+    //        }
 
-            db.GameOverviews.Add(gameOverview);
-            await db.SaveChangesAsync();
+    //        db.GameOverviews.Add(gameOverview);
+    //        await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = gameOverview.Id }, gameOverview);
-        }
+    //        return CreatedAtRoute("DefaultApi", new { id = gameOverview.Id }, gameOverview);
+    //    }
 
-        // DELETE: api/GameOverviews/5
-        [ResponseType(typeof(GameOverview))]
-        public async Task<IHttpActionResult> DeleteGameOverview(int id)
-        {
-            GameOverview gameOverview = await db.GameOverviews.FindAsync(id);
-            if (gameOverview == null)
-            {
-                return NotFound();
-            }
 
-            db.GameOverviews.Remove(gameOverview);
-            await db.SaveChangesAsync();
+    //    [ResponseType(typeof(GameOverview))]
+    //    public async Task<IHttpActionResult> AddPlayerToGame(int gameOverviewId, int playerId)
+    //    {
+    //        if (!ModelState.IsValid)
+    //        {
+    //            return BadRequest(ModelState);
+    //        }
 
-            return Ok(gameOverview);
-        }
+    //        GameOverview gameOverview = await db.GameOverviews.FindAsync(gameOverviewId);
+    //        db.Entry(gameOverview).Collection(x => x.Players).Load();
+    //        if (gameOverview == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+    //        Player p = await db.Players.FindAsync(playerId);
+    //        if (p == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-        private bool GameOverviewExists(int id)
-        {
-            return db.GameOverviews.Count(e => e.Id == id) > 0;
-        }
-    }
+    //        gameOverview.Players.Add(p);
+    //        await db.SaveChangesAsync();
+
+    //        return Ok(gameOverview);
+    //    }
+
+    //    // DELETE: api/GameOverviews/5
+    //    [ResponseType(typeof(GameOverview))]
+    //    public async Task<IHttpActionResult> DeleteGameOverview(int id)
+    //    {
+    //        GameOverview gameOverview = await db.GameOverviews.FindAsync(id);
+    //        if (gameOverview == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        db.GameOverviews.Remove(gameOverview);
+    //        await db.SaveChangesAsync();
+
+    //        return Ok(gameOverview);
+    //    }
+
+    //    protected override void Dispose(bool disposing)
+    //    {
+    //        if (disposing)
+    //        {
+    //            db.Dispose();
+    //        }
+    //        base.Dispose(disposing);
+    //    }
+
+    //    private bool GameOverviewExists(int id)
+    //    {
+    //        return db.GameOverviews.Count(e => e.Id == id) > 0;
+    //    }
+    //}
 }

@@ -23,6 +23,14 @@ namespace CPPAPI.Controllers
             return db.Players;
         }
 
+        [Route("api/Players/{playerId}")]
+        public IQueryable<Game> GetGames(int playerId)
+        {
+            var gameIds = db.PlayerToGames.Where(x => x.PlayerId == playerId).Select(y=>y.GameId).ToList();
+            var games = db.Games.Where(x => gameIds.Contains(x.Id));
+            return games;
+        }
+
         // GET: api/Players/5
         [ResponseType(typeof(Player))]
         public async Task<IHttpActionResult> GetPlayer(int id)
